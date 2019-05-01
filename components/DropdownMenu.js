@@ -2,15 +2,14 @@ import React from 'react';
 import Dropdown from 'iw-react-dropdown';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Discovery } from 'aws-sdk';
 import { siteUrl } from '../config';
 
 const getPath = (url, siteUrl) => {
   // Get url without the Wordpress url and remove leading and trailing slashes
   const cleanUrl = url.replace(siteUrl, '').replace(/^\/|\/$/g, '');
-  if (!cleanUrl) return ['home'];
-  const pathArray = cleanUrl.split('/');
-  return pathArray;
+  // if (!cleanUrl) return ['home'];
+  // const pathArray = cleanUrl.split('/');
+  return cleanUrl;
 };
 
 const getFullPath = pathArray => {
@@ -22,19 +21,21 @@ const getFullPath = pathArray => {
   return pathArray[0];
 };
 
-const stage = '/dev';
+const isDev = process.env.NODE_ENV === 'dev';
+// const stage = '/dev';
+const stage = isDev ? '/dev' : '';
 
 const DropdownMenu = props => (
   <StyledDropdown
     data={props.data}
     renderLink={data => {
       const path = getPath(data.url, siteUrl);
-      const slug = path[path.length - 1];
-      const fullPath = getFullPath(path);
+      // const slug = path[path.length - 1];
+      // const fullPath = getFullPath(path);
 
       return (
         <div>
-          <Link href={`/wp-page?slug=${slug}`} as={`${stage}/${fullPath}`}>
+          <Link href="/allpages" as={`${stage}/${path}`}>
             <a>{data.title}</a>
           </Link>
         </div>
@@ -45,11 +46,11 @@ const DropdownMenu = props => (
         // TODO: Refactor this into a function that returns and object with slug and fullPath
         const path = getPath(child.url, siteUrl);
         const slug = path[path.length - 1];
-        const fullPath = getFullPath(path);
+        // const fullPath = getFullPath(path);
 
         return (
           <li key={child.id}>
-            <Link href={`/wp-page?slug=${slug}`} as={`${stage}/${fullPath}`}>
+            <Link href={`/wp-page?slug=${slug}`} as={`${stage}/${path}`}>
               <a className="iw-dropdown__subLink">{child.title}</a>
             </Link>
           </li>

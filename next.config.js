@@ -1,10 +1,10 @@
 const withPlugins = require('next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 
-const isProd = process.env.STAGE === 'production';
+const isDev = process.env.STAGE === 'dev';
 
 const nextConfig = {
-  assetPrefix: isProd ? 'https://s3-us-west-2.amazonaws.com/austincc.xyz.sls' : '',
+  assetPrefix: 'https://s3-us-west-2.amazonaws.com/austincc.xyz.totallyrandom',
   target: 'serverless',
 };
 

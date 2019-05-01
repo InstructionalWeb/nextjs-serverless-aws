@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import Link from 'next/link';
 import Meta from './Meta';
 import Header from './Header';
 import GlobalStyle from '../styles/GlobalStyle';
