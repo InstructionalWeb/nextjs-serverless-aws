@@ -9,7 +9,7 @@
     "deploy": "STAGE=dev sls deploy"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "html-react-parser": "^0.7.0",
     "iw-react-dropdown": "^1.0.2",
     "next": "^8.1.0",
